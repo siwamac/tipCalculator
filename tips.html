@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>How much was your bill?</p>
+    <input id="bill" type="text"><select name="currency" id="currency">
+        <option value="$">$</option>
+        <option value="€">€</option>
+        <option value="£">£</option>
+        <option value="zł">zł</option>
+        <option value="">Other</option>
+    </select>
+
+
+    <p>How was your service?</p>
+
+    <select name="satisfaction" id="satisfaction">
+        <option value="0.3">30% - Outstanding</option>
+        <option value="0.2">20% - Good</option>
+        <option value="0.15">15% - It was OK</option>
+        <option value="0.1">10% - Bad</option>
+    </select>
+
+
+    <p>How many people are sharing the bill?</p>
+    <input id="people" type="text">
+
+    <h2>Tip per person: <text id="tip"></text></h2>
+    <h2>Tip total: <text id="tipTotal"></text></h2>
+
+
+    <p><button type="button" onclick="calculate()">CALCULATE!</button></p>
+
+
+    <script>
+        function calculate() {
+
+            let satisf = Number(document.getElementById("satisfaction").value);
+            let bill = document.getElementById("bill").value;
+            bill = bill.replace(/,/g, '.');
+            bill = Number(bill);
+
+            let people = Number(document.getElementById("people").value);
+            let tip, tipPerPerson;
+            let currency = document.getElementById("currency").value;
+            console.log(satisf);
+            console.log(bill);
+            console.log(people);
+
+            if (bill > 0 && people >= 1 && Number.isInteger(people)) {
+                tipPerPerson = satisf * bill / people;
+                tipTotal = satisf * bill;
+                console.log(tipPerPerson.toFixed(2));
+                document.getElementById("tip").innerText = tipPerPerson.toFixed(2) + currency;
+                document.getElementById("tipTotal").innerText = tipTotal.toFixed(2) + currency;
+            } else {
+                alert("Wprowadź poprawną wartość");
+            }
+
+
+
+
+
+        }
+    </script>
+
+</body>
+
+
+
+</html>
